@@ -34,8 +34,13 @@ exports.verify = function(req,res){
 
 		if (titulo){
 			model.Curso.findOne({ where: { nombre: titulo.curso } }).then(function(curso){
+
+						var qr = qrCode.qrcode(4, 'M');
+						qr.addData(titulo.codigo);
+						qr.make();
+						var qr_send=qr.createImgTag(4);
 						
-						res.render('verified',{titulo:titulo, curso:curso});
+						res.render('verified',{titulo:titulo, curso:curso,qr:qr_send});
 
 			});
 
@@ -103,9 +108,7 @@ exports.add_title = function(req,res){
 						console.log('Iteracion: '+iteracion);
 						iteracion++;
 						var aleatorio= randomstring.generate(20);
-						var qr = qrCode.qrcode(4, 'M');
-						qr.addData(aleatorio);
-						qr.make();
+						
 
 						if(!req.body.dni.match(/^\d{8}[a-zA-Z]$/)){
 							model.Curso.findAll().then(function(courses){
@@ -127,7 +130,7 @@ exports.add_title = function(req,res){
 									if(!titulo){
 										
 											console.log("El código generado NO existe");
-											var qr_send=qr.createImgTag(4);
+											
 											model.Titulo.create({nombre:req.body.n_alumno, apellidos:req.body.a_alumno, dni:req.body.dni, telefono:req.body.telefono, curso:req.body.curso, horas:req.body.horas, codigo:aleatorio, inicio: req.body.inicio, fin:req.body.fin}).then(function(titulos){
 											
 											res.redirect('/titles');
@@ -146,7 +149,12 @@ exports.add_title = function(req,res){
 
 exports.render = function(req,res){
 
-res.render('render',{titulo:req.title, curso:req.curso});
+	var qr = qrCode.qrcode(4, 'M');
+	qr.addData(req.title.codigo);
+	qr.make();
+	var qr_send=qr.createImgTag(4);
+
+res.render('render',{titulo:req.title, curso:req.curso, qr:qr_send});
 
 
 
