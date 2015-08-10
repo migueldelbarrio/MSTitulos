@@ -128,7 +128,7 @@ exports.add_title = function(req,res){
 										
 											console.log("El código generado NO existe");
 											var qr_send=qr.createImgTag(4);
-											model.Titulo.create({nombre:req.body.n_alumno, apellidos:req.body.a_alumno, dni:req.body.dni, telefono:req.body.telefono, curso:req.body.curso, horas:req.body.horas, codigo:aleatorio,qr:qr_send, inicio: req.body.inicio, fin:req.body.fin}).then(function(titulos){
+											model.Titulo.create({nombre:req.body.n_alumno, apellidos:req.body.a_alumno, dni:req.body.dni, telefono:req.body.telefono, curso:req.body.curso, horas:req.body.horas, codigo:aleatorio, inicio: req.body.inicio, fin:req.body.fin}).then(function(titulos){
 											
 											res.redirect('/titles');
 											
