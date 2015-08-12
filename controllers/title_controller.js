@@ -27,16 +27,6 @@ exports.load = function(req,res,next,titleId){
 
 }
 
-exports.delete = function(req,res){
-
-
-  req.title.destroy().then(function(){ res.redirect('/admin')})
-
-
-
-
-};
-
 exports.verify = function(req,res){
 
 
