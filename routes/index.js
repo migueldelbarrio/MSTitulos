@@ -58,12 +58,14 @@ router.get('/admin',sessionController.loginRequired);
 router.get('/titles',sessionController.loginRequired);
 router.get('/titles/*',sessionController.loginRequired);
 
+
 router.get('/courses',sessionController.loginRequired);
 router.get('/courses/:courseId(\\d+)/show', courseController.show)
 
 router.get('/admin', titleController.admin_panel);
 router.get('/titles', titleController.get_titles);
 router.get('/titles/:titleId(\\d+)/render', titleController.render);
+router.delete('/titles/:titleId(\\d+)',titleController.delete);
 
 router.get('/dummy',sessionController.loginRequired, titleController.create_dummy);
 router.put('/admin/add_title', titleController.add_title);
