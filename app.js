@@ -139,7 +139,7 @@ app.use(expressPartials());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: false }));
-pp.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 app.use(cookieParser('murciastudio'));
 app.use(session({secret: '<mysecret>', 
